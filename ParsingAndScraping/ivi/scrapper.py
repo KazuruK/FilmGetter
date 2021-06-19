@@ -1,25 +1,16 @@
 import requests
-from requests_html import HTMLSession
-from bs4 import BeautifulSoup
+import re
 
-def ivisearch():
-    session = HTMLSession()
-    iviSearchPattern = "http://ivi.ru/search/?ivi_search="
-    userRequest = input('Введите название фильма ')
-    preReq = "%20".join(userRequest.strip().split())
-    request = iviSearchPattern + preReq
-    searchResp = session.get(request)
-    #responce = self.Response()
-    searchResp.html.render()
-    #searchResp.json()
-    soup = BeautifulSoup(searchResp.text, 'lxml')
-    with open('test.html', 'w', encoding='utf-8') as output_file:
-        output_file.write(searchResp.text)
-    print(request)
+def ivisearch(filmName):
 
-
-def main():
-    ivisearch()
-
-if __name__ == '__main__':
-    main()
+    url = 'https://api.ivi.ru/mobileapi/search/v5/'
+    params = {
+        'query': filmName,
+        'fields': 'id,title',
+        'app_version': '870'
+    }
+    page = requests.get(url, params=params)
+    data = str(page.json())
+    nums = re.findall('\d+', data)
+    filmID = nums[0]
+    return filmID
