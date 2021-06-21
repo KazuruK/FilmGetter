@@ -1,6 +1,7 @@
 import requests
 import re
 from ParsingAndScraping.ivi.scrapper import ivisearch
+from ParsingAndScraping.reg_parser import big_num
 from bs4 import BeautifulSoup
 
 def parse_this(filmName):
@@ -20,7 +21,9 @@ def parse_this(filmName):
     else :
         sub = soup.find('span', class_ = 'nbl-button__secondaryText')
         if (sub != None) : isSubscriptionAvailable = 1
-    quote = re.findall('[0-9]{2,}', str(re.findall('{.*?}', str(soup.find('video-info')))))
+    page = str(soup.find('video-info'))
+    quote = big_num(page)
+    #quote = re.findall('[0-9]{2,}', str(re.findall('{.*?}', str(soup.find('video-info')))))
     if (len(quote)>1):
         del quote[len(quote)-1]
         hdPrice = str(quote[0])
