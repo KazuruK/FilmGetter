@@ -6,3 +6,10 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+#ignored files
+/ParsingAndScraping/__pycache__/
+/__pycache__/
+/ParsingAndScraping/ivi/__pycache__/
+/ParsingAndScraping/wink/__pycache__/
+/ParsingAndScraping/wink/test.html
+/ParsingAndScraping/ivi/test.html
