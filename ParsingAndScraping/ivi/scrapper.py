@@ -1,16 +1,16 @@
 import requests
-import re
+from ParsingAndScraping.reg_parser import digits
 
-def ivisearch(filmName):
 
+def ivi_search(film_name):
     url = 'https://api.ivi.ru/mobileapi/search/v5/'
     params = {
-        'query': filmName,
+        'query': film_name,
         'fields': 'id,title',
         'app_version': '870'
     }
     page = requests.get(url, params=params)
     data = str(page.json())
-    nums = re.findall('\d+', data)
-    filmID = nums[0]
-    return filmID
+    nums = digits(data)
+    film_id = nums[0]
+    return film_id
