@@ -15,7 +15,6 @@ def wink_parser(film_name):
 
     params = {
         'limit': 18,
-        'fields': 'name, id, order_number'
     }
     token_page = requests.post(url_token, json={'fingerprint': ''})
     token = token_page.json()['session_id']
