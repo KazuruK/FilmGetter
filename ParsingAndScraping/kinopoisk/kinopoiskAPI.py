@@ -9,11 +9,10 @@ class KinopoiskAPI:
             'X-API-KEY': '8fcf6015-6f7e-408c-9ced-d7c67167b5a2'
         }
 
-    def get_id_by_keyword(self, text):
+    def get_nameEn_by_keyword(self, text):
         url = self.domen + f'/api/v2.1/films/search-by-keyword?keyword={text}&page=1'
         request = requests.get(url, headers=self.headersAPI)
-        print(request.json())
-        return request.json()['films'][1]['filmId']
+        return request.json()['films'][0]['nameEn']
 
     def get_by_id(self, id):
         url = self.domen + f'/api/v2.1/films/{id}/'
@@ -28,7 +27,7 @@ class KinopoiskAPI:
 
 def main():
     api = KinopoiskAPI()
-    answer = api.get_id_by_keyword('Начало')
+    answer = api.get_nameEn_by_keyword('Начало')
     print(answer)
 
 if __name__ == '__main__':

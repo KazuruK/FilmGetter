@@ -13,15 +13,6 @@ def scrap_megogo(film_name):
     soup = BeautifulSoup(page.text, 'lxml')
     film_info = str(soup.find("div", {"class": "thumb"}))
     url_get = str(re.findall('".+[.]html"', film_info))
-    leng = len(url_get)
-    url = url_get[3:leng-3]
-    print(url)
+    length = len(url_get)
+    url = url_get[3:length - 3]
     return url
-
-
-def main():
-    scrap_megogo()
-
-
-if __name__ == "__main__":
-    main()
