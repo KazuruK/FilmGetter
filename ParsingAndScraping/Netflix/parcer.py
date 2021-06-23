@@ -2,31 +2,41 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from ParsingAndScraping.kinopoisk.kinopoiskAPI import KinopoiskAPI
+from ParsingAndScraping.reg_parser import digits
 
 
 def netflix_parcer(film_name):
-    prices = [599, 799, 999]
-    prepared_name = re.sub(" ", "-", film_name)
+    # prices = [599, 799, 999] '''Unused constant for price output'''
+    string_getter = KinopoiskAPI()
+    prepared_name = re.sub(" ", "-", str(string_getter.get_nameEn_by_keyword(film_name)))
+    if len(prepared_name) == 0:
+        print('Not available on Netflix')
+        return None
     url = 'https://www.flixwatch.co/movies/' + prepared_name
     page = requests.get(url)
     soup = BeautifulSoup(page.text, 'lxml')
     existence = str(soup.findAll("section", {"class": "error-404 not-found"}))
-    if len(existence) > 2:
-        print('Not available on Netflix')
-        return None
+    if len(existence) > 4:
+        tv_series_check = 'https://www.flixwatch.co/tvshows/' + prepared_name
+        tv_page = requests.get(tv_series_check)
+        bs = BeautifulSoup(tv_page.text, 'lxml')
+        tv_existence = str(bs.findAll("section", {"class": "error-404 not-found"}))
+        if len(tv_existence) > 4:
+            print('Not available on Netflix')
+            return None
+        else:
+            return netflix_return_state(bs)
     else:
-        values = str(soup.findAll("a", {"id": "Netflix"}))
-        redirect = re.findall('https.+\d+', values)
-        print(prices)
-        return prices, redirect
+        return netflix_return_state(soup)
 
 
-def main():
-    user_request = input("Введите название фильма ")
-    string_getter = KinopoiskAPI()
-    requested_string = str(string_getter.get_nameEn_by_keyword(user_request))
-    netflix_parcer(requested_string)
-
-
-if __name__ == '__main__':
-    main()
+def netflix_return_state(soup):
+    prices_url = 'https://help.netflix.com/ru/node/24926'
+    plan = requests.get(prices_url)
+    soupp = BeautifulSoup(plan.text, 'lxml')
+    subs = soupp.findAll("div", {"class": "c-wrapper"})
+    num_subs = digits(str(subs))
+    values = str(soup.findAll("a", {"id": "Netflix"}))
+    redirect = re.findall('https.+\d+', values)
+    print(num_subs[1:4])
+    return num_subs[1:4], redirect
