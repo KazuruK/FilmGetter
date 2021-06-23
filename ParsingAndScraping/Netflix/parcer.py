@@ -2,7 +2,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from ParsingAndScraping.kinopoisk.kinopoiskAPI import KinopoiskAPI
-from ParsingAndScraping.reg_parser import digits
+from ParsingAndScraping.assistants import digits
 
 
 def netflix_parcer(film_name):
@@ -38,5 +38,4 @@ def netflix_return_state(soup):
     num_subs = digits(str(subs))
     values = str(soup.findAll("a", {"id": "Netflix"}))
     redirect = re.findall('https.+\d+', values)
-    print(num_subs[1:4])
-    return num_subs[1:4], redirect
+    return [num_subs[1:4], redirect]

@@ -9,3 +9,8 @@ def big_num(page_info):
 def digits(data):
     digit = re.findall("\d+", data)
     return digit
+
+def empty_string_cleaner(input):
+    while ("" in input):
+        input.remove("")
+    return input

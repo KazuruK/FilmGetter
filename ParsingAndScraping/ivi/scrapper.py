@@ -1,5 +1,5 @@
 import requests
-from ParsingAndScraping.reg_parser import digits
+from ParsingAndScraping.assistants import digits
 
 
 def ivi_search(film_name):
@@ -13,4 +13,5 @@ def ivi_search(film_name):
     data = str(page.json())
     nums = digits(data)
     film_id = nums[0]
-    return film_id
+    url = 'https://www.ivi.ru/watch/' + str(film_id)
+    return url
