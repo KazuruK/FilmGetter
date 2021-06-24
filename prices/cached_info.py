@@ -56,8 +56,7 @@ def parse_wink(film_name):
 
 
 def parse_all(film_name):
-    price_dict = {"film_name": film_name,
-                  "ivi": parse_ivi(film_name),
+    price_dict = {"ivi": parse_ivi(film_name),
                   "megogo": parse_megogo(film_name),
                   "netflix": parse_netflix(film_name),
                   "wink": parse_wink(film_name)}

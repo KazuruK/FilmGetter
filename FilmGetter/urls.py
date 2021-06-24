@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 
 from prices.views import PricesView
@@ -25,7 +25,7 @@ router.register('api/prices', PricesView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include(router.urls))
 ]
 
 print(router.urls)
-urlpatterns += router.urls
