@@ -12,6 +12,9 @@ def ivi_search(film_name):
     page = requests.get(url, params=params)
     data = str(page.json())
     nums = digits(data)
-    film_id = nums[0]
-    url = 'https://www.ivi.ru/watch/' + str(film_id)
-    return url
+    if len(nums) == 0:
+        return []
+    else:
+        film_id = nums[0]
+        url = 'https://www.ivi.ru/watch/' + str(film_id)
+        return url
