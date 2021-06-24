@@ -27,7 +27,7 @@ class KinopoiskAPI:
 
 def main():
     api = KinopoiskAPI()
-    answer = api.get_nameEn_by_keyword('Начало')
+    answer = api.get_by_id('447301')
     print(answer)
 
 if __name__ == '__main__':

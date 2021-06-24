@@ -1,4 +1,4 @@
-from ParsingAndScraping import parce_this
+from ParsingAndScraping.kinopoisk import parce_this
 from kinopoiskAPI import KinopoiskAPI
 
 
@@ -11,9 +11,9 @@ class KinopoiskParser(KinopoiskAPI):
             'Origin': 'https://yastatic.net',
             'Referer': 'https://yastatic.net/',
             'Access-Control-Allow-Origin': 'https://yastatic.net',
-            'Content-Type': 'video/MP2T'
+            'Content-Type': 'text/plain;charset=UTF-8'
         }
-        self.bs_find_name = 'span'
+        self.bs_find_name = 'div'
         self.bs_find_class = 'styles_notActualText__1YDaG'
 
     def parse_film_price(self, film):
