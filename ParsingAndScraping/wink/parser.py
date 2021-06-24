@@ -27,7 +27,7 @@ def wink_parser(film_name):
     data = str(result_page.json())
     free_search = str(re.findall('[\']is_purchased[\'][:][\s]True', data))
     if len(free_search) > 2:
-        return 'Free'
+        return ['Free']
     else:
         sub_search = str(re.findall('subscribe', data))
         if len(sub_search) > 2:
@@ -47,7 +47,7 @@ def wink_parser(film_name):
             price_hd = prices[0]
     output_list = [sub_available, price_uhd, price_hd, price_sd]
     output = empty_string_cleaner(output_list)
-    '''print(free_available) #for tests
+    '''#for tests
     print(sub_available)
     print(price_hd, price_sd, price_uhd)'''
     return output

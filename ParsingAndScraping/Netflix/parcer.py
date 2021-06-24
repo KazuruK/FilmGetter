@@ -34,8 +34,8 @@ def netflix_return_state(soup):
     prices_url = 'https://help.netflix.com/ru/node/24926'
     plan = requests.get(prices_url)
     soupp = BeautifulSoup(plan.text, 'lxml')
-    subs = soupp.findAll("div", {"class": "c-wrapper"})
+    subs = soupp.findAll("strong")
     num_subs = digits(str(subs))
     values = str(soup.findAll("a", {"id": "Netflix"}))
     redirect = re.findall('https.+\d+', values)
-    return [num_subs[1:4], redirect]
+    return [num_subs[0], num_subs[1], num_subs[2], redirect]

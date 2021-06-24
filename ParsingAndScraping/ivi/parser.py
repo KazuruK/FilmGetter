@@ -15,7 +15,7 @@ def parse_this(film_name):
     soup = BeautifulSoup(response.text, 'lxml')
     free = str(soup.find('title'))
     if free.find('бесплатно') != -1:
-        return 'Free'
+        return ['Free']
     else:
         sub = soup.find('span', class_='nbl-button__secondaryText')
         if sub is not None:

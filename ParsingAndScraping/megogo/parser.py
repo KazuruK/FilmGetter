@@ -16,11 +16,11 @@ def megogo_parser(film_name):
     values = soup.findAll("span", {"class": "pQualityItemPrice__value"})
     subscribe_button = str(soup.findAll("div", {"class": "btn-description"}))
     subscription = re.findall('Попробовать', subscribe_button)
-    if (len(subscription) > 0) & (len(values) > 0):
-        return 'Free'
+    if (len(subscription) == 0) & (len(values) == 0):
+        return ['Free']
     else:
         if len(subscription) > 0:
-            return 'Available by subscription ' + subscription_price + ' rub'
+            return ['Available by subscription ' + subscription_price + ' rub']
     prices = digits(str(values[0:2]))
     if len(prices) == 2:
         hd_price = prices[0]
