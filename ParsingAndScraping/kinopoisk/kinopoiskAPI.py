@@ -24,10 +24,15 @@ class KinopoiskAPI:
         request = requests.get(url, headers=self.headersAPI)
         return request.json()['data']['webUrl']
 
+    def get_top_films(self):
+        url = self.domen + f'/api/v2.2/films/top'
+        request = requests.get(url, headers=self.headersAPI)
+        return request.json()
+
 
 def main():
     api = KinopoiskAPI()
-    answer = api.get_by_id('447301')
+    answer = api.get_nameEn_by_keyword("1+1")
     print(answer)
 
 if __name__ == '__main__':
