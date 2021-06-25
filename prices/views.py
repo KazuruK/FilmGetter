@@ -1,14 +1,14 @@
-import json
+import datetime as dt
 
-from django.shortcuts import render
+
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 
-from prices import cached_info
+
 from prices.serializers import PricesSerializer
 from prices.models import IdDB
-from ParsingAndScraping.kinopoisk.kinopoiskAPI import KinopoiskAPI
+
 
 
 def get_data(request, kinopoisk_id):
@@ -32,7 +32,9 @@ class PricesView(ModelViewSet):
             iddb = IdDB.objects.create_record(kinopoisk_id)
         else:
             iddb = IdDB.objects.filter(kinopoisk_id=kinopoisk_id).get()
-
+            if (iddb.date_created - dt.date.today()).days <= -3:
+                iddb.delete()
+                iddb = IdDB.objects.create_record(kinopoisk_id)
         print(iddb.price)
 
         data = {
@@ -40,6 +42,7 @@ class PricesView(ModelViewSet):
             "title": iddb.title,
             "title_en": iddb.title_en,
             "year": iddb.year,
+            "detail": iddb.detail,
             "price": iddb.price,
         }
 

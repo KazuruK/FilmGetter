@@ -1,6 +1,6 @@
 from django.db import models
 import jsonfield
-
+import datetime as dt
 
 # Create your models here.
 from ParsingAndScraping.kinopoisk.kinopoiskAPI import KinopoiskAPI
@@ -34,6 +34,9 @@ class IdDB(models.Model):
     title = models.CharField(max_length=200)
     title_en = models.CharField(max_length=200)
     year = models.IntegerField()
+    date_created = models.DateField(default=dt.date.today())
+    detail = models.CharField(max_length=20, default='Found')
+
     price = jsonfield.JSONField()
 
     objects = IdDBManager()
