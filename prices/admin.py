@@ -11,6 +11,8 @@ class IdDBAdmin(admin.ModelAdmin):
         'title',
         'title_en',
         'year',
+        'detail',
+        'date_created',
         'price',)
     search_fields = ('kinopoisk_id', 'title',)
     list_filter = ('year',)

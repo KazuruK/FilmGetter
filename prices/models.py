@@ -1,12 +1,12 @@
-from django.db import models
 import jsonfield
 import datetime as dt
+from django.db import models
 
-# Create your models here.
 from ParsingAndScraping.kinopoisk.kinopoiskAPI import KinopoiskAPI
 from prices import cached_info
 
 
+# Create your models here.
 class IdDBManager(models.Manager):
     def create_record(self, kinopoisk_id):
         api = KinopoiskAPI()

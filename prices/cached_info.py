@@ -26,7 +26,8 @@ def cache_this(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         cache_key = str(args) + func.__name__
-        if not cache_key in cache or (cache[cache_key][1] - dt.datetime.today()).days <= -3:
+        if not cache_key in cache or (
+                cache[cache_key][1] - dt.datetime.today()).days <= -3:
             result = func(*args, **kwargs)
             cache[cache_key] = [result, dt.datetime.today()]
             return result
@@ -34,20 +35,24 @@ def cache_this(func):
 
     return wrapper
 
+
 @time_check
 @cache_this
 def parse_ivi(film_name):
     return parser_ivi.parse_this(film_name)
+
 
 @time_check
 @cache_this
 def parse_megogo(film_name):
     return parser_megogo.megogo_parser(film_name)
 
+
 @time_check
 @cache_this
 def parse_netflix(film_name):
     return parser_netflix.netflix_parcer(film_name)
+
 
 @time_check
 @cache_this
@@ -70,7 +75,6 @@ def parse_all(film_name):
 def main():
     parse_all("Начало")
     parse_all("Начало")
-
 
 
 if __name__ == '__main__':

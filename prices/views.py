@@ -10,11 +10,6 @@ from prices.serializers import PricesSerializer
 from prices.models import IdDB
 
 
-
-def get_data(request, kinopoisk_id):
-    pass
-
-
 class PricesView(ModelViewSet):
     queryset = IdDB.objects.all()
     serializer_class = PricesSerializer
