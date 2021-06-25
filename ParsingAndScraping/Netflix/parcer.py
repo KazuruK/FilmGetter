@@ -10,8 +10,7 @@ def netflix_parcer(film_name):
     string_getter = KinopoiskAPI()
     prepared_name = re.sub(" ", "-", str(string_getter.get_nameEn_by_keyword(film_name)))
     if len(prepared_name) == 0:
-        print('Not available on Netflix')
-        return None
+        return ['Not available on Netflix']
     url = 'https://www.flixwatch.co/movies/' + prepared_name
     page = requests.get(url)
     soup = BeautifulSoup(page.text, 'lxml')
@@ -22,8 +21,7 @@ def netflix_parcer(film_name):
         bs = BeautifulSoup(tv_page.text, 'lxml')
         tv_existence = str(bs.findAll("section", {"class": "error-404 not-found"}))
         if len(tv_existence) > 4:
-            print('Not available on Netflix')
-            return None
+            return ['Not available on Netflix']
         else:
             return netflix_return_state(bs)
     else:

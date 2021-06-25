@@ -11,6 +11,8 @@ def megogo_parser(film_name):
     hd_price = ''
     sd_price = ''
     url = scrap_megogo(film_name)
+    if url == ['']:
+        return ['Not available']
     page = requests.get(url)
     soup = BeautifulSoup(page.text, 'lxml')
     values = soup.findAll("span", {"class": "pQualityItemPrice__value"})

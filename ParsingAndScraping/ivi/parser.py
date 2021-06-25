@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 def parse_this(film_name):
     url = ivi_search(film_name)
     if len(url) == 0:
-        return []
+        return ['Not available']
     is_subscription_available = ''
     ivi_price = '399'
     hd_price = ''
