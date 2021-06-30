@@ -32,7 +32,7 @@ class KinopoiskAPI:
 
 def main():
     api = KinopoiskAPI()
-    answer = api.get_nameEn_by_keyword('Начало')
+    answer = api.get_nameEn_by_keyword("1+1")
     print(answer)
 
 

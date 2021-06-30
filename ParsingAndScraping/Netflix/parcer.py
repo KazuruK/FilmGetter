@@ -36,4 +36,4 @@ def netflix_return_state(soup):
     num_subs = digits(str(subs))
     values = str(soup.findAll("a", {"id": "Netflix"}))
     redirect = re.findall('https.+\d+', values)
-    return [num_subs[0], num_subs[1], num_subs[2], redirect]
+    return [num_subs[0], num_subs[1], num_subs[2]]

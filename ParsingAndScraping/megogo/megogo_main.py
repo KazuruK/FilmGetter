@@ -2,7 +2,8 @@ from ParsingAndScraping.megogo.parser import megogo_parser
 
 
 def main():
-    film_name = input("Введите название фильма ")
+    film_name = "Алиса в стране чудес"
+    print(megogo_parser(film_name))
     return megogo_parser(film_name)
 
 

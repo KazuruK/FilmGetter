@@ -1,4 +1,4 @@
-import requests
+from requests_html import HTMLSession
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 
@@ -10,8 +10,10 @@ def parse_this(parsing_url, headers_without_useragent, bs_find_name, bs_find_cla
     headers = headers_without_useragent
     headers['User-Agent'] = UserAgent().chrome
 
-    r = requests.get(url, headers=headers)
-    soup = BeautifulSoup(r.text, 'lxml')
+    session = HTMLSession()
+    r = session.get(url, headers=headers)
+    r.html.render()
+    soup = BeautifulSoup(r.html.text, 'lxml')
     quote = soup.find(bs_find_name, class_=bs_find_class)
     print(soup)
     print(quote)
