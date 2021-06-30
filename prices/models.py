@@ -22,7 +22,7 @@ class IdDBManager(models.Manager):
             title=title,
             title_en=title_en,
             year=year,
-            price=str(prices_json)
+            price=prices_json
         )
 
         return iddb_record
