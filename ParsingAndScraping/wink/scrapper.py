@@ -7,7 +7,7 @@ def wink_search(film_name):
     url_token = 'https://cnt-odcv-itv03.svc.iptv.rt.ru/api/v2/portal/session_tokens'
 
     params = {
-        'query': film_name,  # сюда подставляйте название фильма для поиска
+        'query': film_name,
         'limit': 18
     }
     token_page = requests.post(url_token, json={'fingerprint': ''})
@@ -15,7 +15,6 @@ def wink_search(film_name):
     headers = {
         'session_id': f'{token}'
     }
-
     result_page = requests.get(url, headers=headers, params=params)
     data = result_page.json()
     page_info = data['items'][0]['content_items'][00]

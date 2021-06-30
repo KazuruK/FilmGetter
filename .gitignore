@@ -1,5 +1,4 @@
 *.html
 *.pyc
-/db.sqlite3
-/ParsingAndScraping/errors.txt
-/ParsingAndScraping/tests.py
+ParsingAndScraping/errors.txt
+ParsingAndScraping/tests.py

@@ -12,7 +12,9 @@ def wink_parser(film_name):
     sub_price = '399'
     film_id = wink_search(film_name)
     if film_id == '':
-        return ['Not available on Wink']
+        film_id = wink_search(film_name[0:len(film_name) - 5])
+        if film_id == '':
+            return ['Not available on Wink']
     url = 'https://sz-spbr-itv01.svc.iptv.rt.ru/api/v2/portal/media_items/' + film_id
     url_token = 'https://sz-spbr-itv01.svc.iptv.rt.ru/api/v2/portal/session_tokens'
 
@@ -48,12 +50,8 @@ def wink_parser(film_name):
                 price_hd = prices[2]
                 price_uhd = prices[1]
             else:
-                    price_sd = prices[1]
-                    price_hd = prices[0]
+                price_sd = prices[1]
+                price_hd = prices[0]
     output_list = [sub_available, price_uhd, price_hd, price_sd]
     output = empty_string_cleaner(output_list)
-    print(output)
-    '''#for tests
-    print(sub_available)
-    print(price_hd, price_sd, price_uhd)'''
     return output
