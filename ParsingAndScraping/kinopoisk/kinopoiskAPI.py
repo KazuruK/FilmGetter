@@ -1,5 +1,7 @@
 import requests
 
+class KinopoiskAPIError(Exception):
+    pass
 
 class KinopoiskAPI:
     def __init__(self):
@@ -17,6 +19,10 @@ class KinopoiskAPI:
     def get_by_id(self, id):
         url = self.domen + f'/api/v2.1/films/{id}/'
         request = requests.get(url, headers=self.headersAPI)
+        if request.status_code != 200:
+            raise KinopoiskAPIError(f'Запрос к фильму с id: {id},'
+                                    f' вернул статус'
+                                    f' {request.status_code}')
         return request.json()
 
     def get_film_url(self, id):

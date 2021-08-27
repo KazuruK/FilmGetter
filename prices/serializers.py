@@ -10,7 +10,6 @@ class PricesSerializer(ModelSerializer):
             'kinopoisk_id',
             'title',
             'title_en',
-            'detail',
             'year',
             'price'
         ]
